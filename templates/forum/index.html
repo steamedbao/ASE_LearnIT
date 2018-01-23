@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load forum_extras %}
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3>Latest Questions</h3>
+        </div>
+        <div class="card-body">
+          {% for question in latest_question_list %}
+            {% include 'forum/_question.html' %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      {% if not request.user.is_authenticated %}
+        <a href="{% url 'register' %}" class="btn btn-primary btn-block mb-2 btn-padding">
+          Create an Account
+        </a>
+      {% endif %}
+      {% show_categories %}
+    </div>
+  </div>
+
+{% endblock %}

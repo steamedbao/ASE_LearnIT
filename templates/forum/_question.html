@@ -1,0 +1,23 @@
+<article class="mb-4">
+  <h4>
+    <a href="{{ question.get_absolute_url }}">
+      {{ question.title }}
+    </a>
+  </h4>
+  <span class="badge badge-primary float-right">
+    {{ question.replies.count }}
+  </span>
+  <p>
+    in
+    <a href="{{ question.category.get_absolute_url }}">
+      {{ question.category }}
+    </a>
+    by
+    <a href="{% url 'profile' question.owner %}">
+      {{ question.owner }}
+    </a>
+  </p>
+  <div class="">
+    {{ question.content|slice:':200' }} ...
+  </div>
+</article>

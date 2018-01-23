@@ -1,0 +1,49 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  /* background-color: #f2f2f2; */
+}
+
+nav {
+  margin-bottom: 20px;
+}
+
+#content {
+  margin-bottom: 40px !important;
+}
+
+.input-group {
+  max-height: 40px;
+}
+
+.footer {
+  position: absolute;
+  height: 120px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 3rem;
+  background: #141414 none repeat scroll 0 0;
+  color: #fff;
+  text-align: center;
+}
+
+.btn-search {
+  margin-left: -8px;
+  max-height: 40px;
+}
+
+.card-primary {
+  margin-top: 20px;
+}
+
+.btn-padding {
+  padding: 20px;
+}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{ user.username }}' profile {% endblock %}
+
+{% block content %}
+
+  <div class="card card-primary mb-3">
+    <div class="card-header">
+      <h3>Questions submited by {{ profile.user }}</h3>
+    </div>
+    <div class="card-body">
+      {% for question in profile.user.questions.all %}
+        <article class="mb-4">
+          <a href="{{ question.get_absolute_url }}">
+            <h4>{{ question.title }}</h4>
+          </a>
+          <p>in {{ question.category }} by {{ question.owner }}  </p>
+          <div class="">
+            {{ question.content }}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

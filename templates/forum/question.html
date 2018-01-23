@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+
+  <div class="card card-primary">
+    <div class="card-header">
+      <h4>{{ question.title }}</h4>
+    </div>
+    <div class="card-body">
+      <p>
+        {{ question.content }}
+      </p>
+    </div>
+  </div>
+
+  {% for reply in question.replies.all %}
+    <div class="card card-primary">
+      <div class="card-header">
+        <p>{{ reply.creator }} replied:</p>
+      </div>
+      <div class="card-body">
+        <p>
+          {{ reply.content }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
+  
+
+{% endblock %}

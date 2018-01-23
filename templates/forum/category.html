@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+
+  <div class="card card-primary">
+    <div class="card-header">
+      <h4>Questions in {{ category.title }}</h4>
+    </div>
+    <div class="card-body">
+      {% if category.questions.all %}
+        {% for question in category.questions.all %}
+          <article class="mb-4">
+            <a href="{{ question.get_absolute_url }}">
+              <h4>{{ question.title }}</h4>
+            </a>
+            <p>on {{ question.created_at|date:"M d, Y" }} by {{ question.owner }}  </p>
+            <div class="">
+              {{ question.content }}
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <h4>No questions in this category. You can add it by clicking <a href="{% url 'new_question' %}">here</a>!</h4>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}
