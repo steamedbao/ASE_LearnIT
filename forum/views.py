@@ -16,8 +16,9 @@ class IndexView(generic.ListView):
             search = self.request.GET['search']
 
             return Question.objects.filter(
-                Q(title__icontains=search) | Q(content__icontains=search)
-                )
+                        Q(title__icontains=search) |
+                        Q(content__icontains=search)
+                    )
         else:
             return reversed(get_list_or_404(Question))
 
