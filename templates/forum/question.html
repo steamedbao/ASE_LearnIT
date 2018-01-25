@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load bootstrap4 %}
+
 {% block title %} | Welcome {% endblock %}
 
 {% block content %}
@@ -28,6 +30,22 @@
     </div>
   {% endfor %}
 
-  
+  {% if request.user.is_authenticated %}
+    <div class="card card-primary">
+      <div class="card-body">
+        <form action="" method="post" class="form">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons %}
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          {% endbuttons %}
+        </form>
+      </div>
+    </div>
+  {% else %}
+    <div class="text-center" style="margin-top: 40px;">
+      Please <a href="{% url 'login' %}">login</a> in order to reply.
+    </div>
+  {% endif %}
 
 {% endblock %}

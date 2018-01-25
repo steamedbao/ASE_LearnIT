@@ -11,13 +11,11 @@
           <h3>Latest Questions</h3>
         </div>
         <div class="card-body">
-          {% if latest_question_list %}
-            {% for question in latest_question_list %}
-              {% include 'forum/_question.html' %}
-            {% endfor %}
-          {% else %}
+          {% for question in latest_question_list %}
+            {% include 'forum/_question.html' %}
+          {% empty %}
             <h4>No questions are submitted. You can add it by clicking <a href="{% url 'new_question' %}">here</a>!</h4>
-          {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
