@@ -55,6 +55,7 @@ class QuestionDetailView(generic.DetailView):
             self.object = self.get_object()
             context = super().get_context_data(**kwargs)
             context['form'] = form
+
             return self.render_to_response(context=context)
 
 
@@ -67,19 +68,3 @@ class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
-
-# functional views
-# @login_required
-# def reply_to_question(request, slug):
-#     question = get_object_or_404(Question, slug=slug)
-#     if request.method == "POST":
-#         form = ReplyForm(request.POST)
-#         if form.is_valid():
-#             reply = form.save(commit=False)
-#             reply.owner = request.user
-#             reply.question = question
-#             reply.save()
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         form = CommentForm()
-#     return render(request, 'blog/add_comment_to_post.html', {'form': form})
