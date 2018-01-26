@@ -24,7 +24,7 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.user.username)
-        super(Profile, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 @receiver(post_save, sender=User)

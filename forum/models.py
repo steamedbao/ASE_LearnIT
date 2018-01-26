@@ -21,7 +21,7 @@ class Category(models.Model):
         if not self.pk:
             self.slug = slugify(self.title)
 
-        super(Category, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -46,7 +46,7 @@ class Question(models.Model):
         if not self.pk:
             self.slug = slugify(self.title)
 
-        super(Question, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     class Meta:
         get_latest_by = "-pk"
