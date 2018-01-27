@@ -1,10 +1,9 @@
 from django.urls import path
 from django.urls import reverse
-from django.conf import settings
 from django.contrib import admin
 from forum import views as forum_views
-from django.conf.urls.static import static
 from accounts.views import ProfileDetailView, RegisterUserView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth.views import(
     LoginView,
     LogoutView,
@@ -33,4 +32,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += staticfiles_urlpatterns()
