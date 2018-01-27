@@ -135,3 +135,5 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = '/'
+
+ADMINS = (('Milos Jankovic', 'mischkez987@gmail.com'),)
