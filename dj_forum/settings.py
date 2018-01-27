@@ -101,6 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -124,14 +126,13 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'assets'),
-]
-
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-LOGIN_REDIRECT_URL = '/'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, 'assets'),
+]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
