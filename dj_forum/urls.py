@@ -1,6 +1,7 @@
-from django.urls import path
 from django.urls import reverse
+from django.conf import settings
 from django.contrib import admin
+from django.urls import path, include
 from forum import views as forum_views
 from accounts.views import ProfileDetailView, RegisterUserView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -28,8 +29,13 @@ urlpatterns = [
 
     path('questions/new', forum_views.QuestionCreateView.as_view(), name='new_question'),
     path('questions/<slug:slug>', forum_views.QuestionDetailView.as_view(), name='question'),
+    path('questions/<slug:slug>/edit', forum_views.QuestionUpdateView.as_view(), name='update_question'),
 
     path('admin/', admin.site.urls),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns.append(path('__debug__', include(debug_toolbar.urls)),)

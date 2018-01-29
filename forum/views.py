@@ -60,6 +60,12 @@ class QuestionDetailView(generic.DetailView):
             return self.render_to_response(context=context)
 
 
+class QuestionUpdateView(generic.UpdateView):
+    model = Question
+    fields = ['category', 'content']
+    template_name = 'forum/update_question.html'
+
+
 class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = '/accounts/login'
     model = Question

@@ -9,6 +9,7 @@ Simple forum app(website) bult with pythons most popular web framework - Django.
 - Unauthenticated user can see index page
 - Unauthenticated user can sign in or register
 - All users can use search form to find questions
-- Authenticated user can ask a question
+- Authenticated user can submit a question
+- Authenticated user can edit the submitted question
 - Authenticated user can submit a reply to other users questions
 - Voting system and more awesome functionality coming soon...

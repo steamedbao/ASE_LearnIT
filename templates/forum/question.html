@@ -8,6 +8,11 @@
 
   <div class="card card-primary">
     <div class="card-header">
+      {% if question.owner == request.user %}
+        <span class="float-right">
+          <a href="{% url 'update_question' question.slug %}">Edit</a>
+        </span>
+      {% endif %}
       <h4>{{ question.title }}</h4>
     </div>
     <div class="card-body">
