@@ -1,0 +1,16 @@
+<div class="card card-primary">
+  <div class="card-header">
+    <span>{{ reply.creator }} replied:</span>
+    {% if reply.creator == request.user %}
+      <span class="float-right">
+        <a href="{% url 'update_reply' reply.question.slug reply.pk %}">Edit</a> |
+        <a href="{% url 'delete_reply' reply.question.slug reply.pk %}">Delete</a>
+      </span>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <p>
+      {{ reply.content }}
+    </p>
+  </div>
+</div>

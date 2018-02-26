@@ -30,6 +30,10 @@ urlpatterns = [
     path('questions/new', forum_views.QuestionCreateView.as_view(), name='new_question'),
     path('questions/<slug:slug>', forum_views.QuestionDetailView.as_view(), name='question'),
     path('questions/<slug:slug>/edit', forum_views.QuestionUpdateView.as_view(), name='update_question'),
+    path('questions/<slug:slug>/delete', forum_views.QuestionDeleteView.as_view(), name='delete_question'),
+
+    path('questions/<slug:slug>/replies/<int:pk>/edit', forum_views.ReplyUpdateView.as_view(), name='update_reply'),
+    path('questions/<slug:slug>/replies/<int:pk>/delete', forum_views.ReplyDeleteView.as_view(), name='delete_reply'),
 
     path('admin/', admin.site.urls),
 ]

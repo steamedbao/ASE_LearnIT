@@ -10,7 +10,8 @@
     <div class="card-header">
       {% if question.owner == request.user %}
         <span class="float-right">
-          <a href="{% url 'update_question' question.slug %}">Edit</a>
+          <a href="{% url 'update_question' question.slug %}">Edit</a> |
+          <a href="{% url 'delete_question' question.slug %}">Delete</a>
         </span>
       {% endif %}
       <h4>{{ question.title }}</h4>
@@ -23,16 +24,7 @@
   </div>
 
   {% for reply in question.replies.all %}
-    <div class="card card-primary">
-      <div class="card-header">
-        <p>{{ reply.creator }} replied:</p>
-      </div>
-      <div class="card-body">
-        <p>
-          {{ reply.content }}
-        </p>
-      </div>
-    </div>
+    {% include 'forum/_reply.html' %} 
   {% endfor %}
 
   {% if request.user.is_authenticated %}

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Category(models.Model):
-    title = models.CharField(max_length=150)
+    title = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=150, unique=True, editable=False)
     description = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,9 +30,9 @@ class Category(models.Model):
 class Question(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='questions')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='questions')
-    title = models.CharField(max_length=150)
+    title = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=150, unique=True, editable=False)
-    content = models.TextField(blank=False)
+    content = models.TextField(blank=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -55,7 +55,7 @@ class Question(models.Model):
 class Reply(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='replies')
-    content = models.TextField(blank=False)
+    content = models.TextField(blank=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

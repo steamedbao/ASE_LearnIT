@@ -1,7 +1,9 @@
 from .forms import ReplyForm
 from django.db.models import Q
+from django.http import Http404
 from django.views import generic
-from .models import Category, Question
+from django.urls import reverse_lazy
+from .models import Category, Question, Reply
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, get_list_or_404
@@ -75,3 +77,39 @@ class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
+
+
+class QuestionDeleteView(generic.edit.DeleteView):
+    model = Question
+    success_url = reverse_lazy('index')
+
+
+class ReplyUpdateView(generic.UpdateView):
+    model = Reply
+    fields = ['content',]
+    template_name = 'forum/update_reply.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if not obj.creator == self.request.user:
+            raise Http404
+        question = Question.objects.get(slug=obj.question.slug)
+        self.question = question
+        return obj
+
+    def get_success_url(self):
+        return reverse_lazy('question', args=(self.question.slug,))
+
+class ReplyDeleteView(generic.edit.DeleteView):
+    model = Reply
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if not obj.creator == self.request.user:
+            raise Http404
+        question = Question.objects.get(slug=obj.question.slug)
+        self.question = question
+        return obj
+
+    def get_success_url(self):
+        return reverse_lazy('question', args=(self.question.slug,))
