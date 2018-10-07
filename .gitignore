@@ -89,7 +89,6 @@ local_settings.py
 db.sqlite3
 *.sqlite3
 db.sqlite3-journal
-assets/
 posts/_pycache_/
 registration/_pycache_/
 blog/_pycache_/
