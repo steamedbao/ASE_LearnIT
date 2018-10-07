@@ -5,10 +5,9 @@
 {% block title %} Submit a Question {% endblock %}
 
 {% block content %}
+  <div class="col-md-6 offset-md-3 mt-4">
+    <h4 class="mb-4">Fill out the form to submit a question:</h4>
 
-  <h1>Ask a Question</h1><hr>
-
-  <div class="col-md-6 offset-md-3">
     {% if form.errors %}
       {% for field in form %}
         {% for error in field.errors %}

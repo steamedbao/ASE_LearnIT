@@ -1,0 +1,25 @@
+<article class="mb-4">
+  <h5>
+    <strong>
+      <a href="{{ question.get_absolute_url }}" class="text-secondary">
+        {{ question.title }}
+      </a>
+    </strong>
+  </h5>
+  <span class="badge badge-dark float-right">
+    {{ question.replies.count }}
+  </span>
+  <p style="font-size: 0.9em; font-size: 0.8em;"> 
+    in
+    <a href="{{ question.category.get_absolute_url }}" class="text-danger bold upper">
+      {{ question.category }}
+    </a>
+    by
+    <a href="{% url 'profile' question.owner %}" class="text-success bold upper">
+      {{ question.owner }}
+    </a>
+  </p>
+  <div class="">
+    {{ question.content|slice:':140' }} ...
+  </div>
+</article>

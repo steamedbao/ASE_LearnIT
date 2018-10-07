@@ -1,5 +1,5 @@
 """
-Django settings for dj_forum project on Heroku. For more info, see:
+Django settings for forum project on Heroku. For more info, see:
 https://github.com/heroku/heroku-django-template
 
 For more information on this file, see
@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+
 import dj_database_url
 from decouple import config
 
@@ -35,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'forum.apps.ForumConfig',
+    'questions.apps.QuestionsConfig',
     'accounts.apps.AccountsConfig',
     'bootstrap4',
     'debug_toolbar',
@@ -53,12 +54,12 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-ROOT_URLCONF = 'dj_forum.urls'
+ROOT_URLCONF = 'forum.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dj_forum.wsgi.application'
+WSGI_APPLICATION = 'forum.wsgi.application'
 
 DATABASES = {
     'default': {

@@ -9,10 +9,7 @@ body {
   padding-bottom: 6rem;
   min-height: 100%;
   /* background-color: #f2f2f2; */
-}
-
-nav {
-  margin-bottom: 20px;
+  text-align: justify;
 }
 
 #content {
@@ -44,4 +41,43 @@ nav {
 
 .btn-padding {
   padding: 20px;
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.text-secondary {
+  color: black !important;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.card {
+  border-radius: 0%;
+}
+
+.list-group-item {
+  border-radius: 0% !important;
+}
+
+.border-bottom {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid black;
+}
+
+.bg-light {
+  background-color: #fcfcfc !important;
 }

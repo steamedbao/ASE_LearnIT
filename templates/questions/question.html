@@ -14,17 +14,25 @@
           <a href="{% url 'delete_question' question.slug %}">Delete</a>
         </span>
       {% endif %}
-      <h4>{{ question.title }}</h4>
+      <h5>{{ question.title }}</h5>
     </div>
     <div class="card-body">
       <p>
         {{ question.content }}
       </p>
     </div>
+    <div class="card-footer">
+      <strong id="likes-counter-{{ question.id }}">
+        {{ question.likes.count }}
+        {% if question.likes.count == 1 %} like {% else %} likes {% endif %}
+      </strong>
+      <a href="#" class="ml-2">Like</a>
+      <a href="#" class="ml-2">Reply</a>
+    </div>
   </div>
 
   {% for reply in question.replies.all %}
-    {% include 'forum/_reply.html' %} 
+    {% include 'questions/_reply.html' %} 
   {% endfor %}
 
   {% if request.user.is_authenticated %}
