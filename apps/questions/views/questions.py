@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
@@ -15,25 +16,31 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        request = self.request
+        request = self.request.GET
 
-        if 'q' in request.GET:
-            q = request.GET['q']
+        if 'q' in request:
+            q = request['q']
 
             return Question.objects.filter(
                 Q(title__icontains=q) | Q(content__icontains=q)
             )
 
-        elif 'popular' in request.GET:
+        elif 'popular' in request:
             return Question.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')
 
-        elif 'solved' in request.GET and request.GET['solved'] == '1':
-            return get_list_or_404(Question, solved=1)
+        elif 'solved' in request and request['solved'] == '1':
+            try:
+                return Question.objects.filter(solved=1)
+            except ObjectDoesNotExist:
+                return False
 
-        elif 'solved' in request.GET and request.GET['solved'] == '0':
-            return get_list_or_404(Question, solved=0)
+        elif 'solved' in request and request['solved'] == '0':
+            try:
+                return Question.objects.filter(solved=0)
+            except ObjectDoesNotExist:
+                return False
 
-        elif 'noreplies' in request.GET:
+        elif 'noreplies' in request:
             return Question.objects.annotate(num_replies=Count('replies')).filter(num_replies=0)
 
         return reversed(get_list_or_404(Question))

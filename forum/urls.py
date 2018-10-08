@@ -7,12 +7,14 @@ from django.urls import include, path, reverse
 from apps.questions.views.questions import IndexView
 
 urlpatterns = [
+    path('admin', admin.site.urls),
+
     path('', IndexView.as_view(), name='index'),
-    path('admin/', admin.site.urls),
     path('search', IndexView.as_view(), name='search'),
 
     path('', include('apps.accounts.urls')),
     path('', include('apps.questions.urls')),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

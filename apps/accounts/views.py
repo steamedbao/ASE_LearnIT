@@ -41,4 +41,4 @@ class RegisterUserView(FormView):
             form.cleaned_data['password1']
         )
 
-        return super(RegisterUser, self).form_valid(form)
+        return super(RegisterUserView, self).form_valid(form)
