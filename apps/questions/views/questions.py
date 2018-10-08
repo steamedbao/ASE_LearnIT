@@ -75,7 +75,7 @@ class QuestionDetailView(generic.DetailView):
 
 class QuestionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Question
-    fields = ['category', 'content']
+    fields = ['category', 'content', 'solved']
     template_name = 'questions/update_question.html'
 
 

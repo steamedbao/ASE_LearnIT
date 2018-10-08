@@ -19,6 +19,6 @@ urlpatterns = [
     path('profiles/<slug:slug>', ProfileDetailView.as_view(), name='profile'),
     path('profiles/<slug:slug>/edit',
          ProfileUpdateView.as_view(), name='edit_profile'),
-    path('accounts/<int:pk>/edit',
+    path('accounts/edit',
          AccountUpdateView.as_view(), name='edit_account'),
 ]

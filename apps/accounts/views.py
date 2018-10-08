@@ -25,6 +25,9 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
     form_class = RegisterForm
     template_name = 'accounts/account_edit.html'
 
+    def get_object(self):
+        return self.request.user
+
 
 class RegisterUserView(FormView):
     template_name = 'accounts/register.html'
