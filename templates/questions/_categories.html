@@ -3,10 +3,13 @@
     <span class="upper bold text-secondary">Categories:</span>
   </li>
   {% for category in categories %}
-    <li class="list-group-item d-flex justify-content-between align-items-center bold bg-light no-border">
-      <a href="{{ category.get_absolute_url }}" class="text-danger">
-        {{ category.title }}
-      </a>
+    <li class="list-group-item d-flex justify-content-between align-items-center bold bg-light no-border text-danger">
+      <span>
+        <i class="fas fa-hashtag fa-sm"></i>
+        <a href="{{ category.get_absolute_url }}" class="text-primary">
+          <span class="ml-1">{{ category.title }}</span>
+        </a>
+      </span>
       <span class="badge badge-primary">
         {{ category.questions.count }}
       </span>

@@ -4,63 +4,57 @@
 
 {% block content %}
 
-  <div class="row mt-3">
+  <div class="row mt-4">
     <div class="col-md-8">
-      <div class="card mb-3 no-border">
-        <div class="card-header white-bg">
-          <h4>
-            <strong>
-              {% if request.path == '/' %} 
-                Latest Questions 
-              {% else %}
-                Search Results 
-              {% endif %}
-            </strong>
-          </h4>
-        </div>
-        <div class="card-body">
-          {% for question in latest_question_list %}
-            {% include 'questions/_question.html' %}
-          {% empty %}
-            <h4>No questions are submitted. You can add it by clicking <a href="{% url 'new_question' %}">here</a>!</h4>
-          {% endfor %}
-        </div>
-      </div>
+      {% for question in latest_question_list %}
+        {% include 'questions/_question.html' %}
+      {% empty %}
+        <h4>No questions are submitted. You can add it by clicking <a href="{% url 'new_question' %}">here</a>!</h4>
+      {% endfor %}
     </div>
-    <div class="col-md-4 bg-light">
+    <div class="col-md-4">
       {% if not request.user.is_authenticated %}
         <a href="{% url 'register' %}" class="btn btn-primary btn-block mb-2 btn-padding">
           Create an Account
         </a>
       {% endif %}
 
-      <ul class="list-group mt-4 mb-4">
-          <li class="list-group-item d-flex justify-content-between align-items-center no-border bg-light">
-            <span class="upper bold text-secondary">Filters:</span>
-          </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center text-info bold no-border bg-light">
-          All Questions
-          <span class="badge badge-primary badge-info">14</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center text-info bold no-border bg-light">
-          Most Popular
-          <span class="badge badge-primary badge-info">2</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center text-info bold no-border bg-light">
-          Solved
-          <span class="badge badge-primary badge-info">1</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center text-info bold no-border bg-light">
-          Unsolved
-          <span class="badge badge-primary badge-info">1</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center text-info bold no-border bg-light">
-          No Replies
-          <span class="badge badge-primary badge-info">1</span>
-        </li>
-      </ul>
+      {% include 'questions/_filters.html' %}
 
       {% show_categories %}
+
+      <ul class="list-group mt-4 mb-4">
+        <li class="list-group-item d-flex justify-content-between align-items-center no-border bg-light">
+          <span class="upper bold text-secondary">Statistics:</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-warning no-border bg-light">
+          <span>
+            <i class="fas fa-users"></i>
+            <a href="#" class="bold text-primary">
+              <span class="ml-1">Total Members:</span>
+            </a>
+          </span>
+          <span class="badge badge-primary badge-primary">14</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-warning no-border bg-light">
+          <span>
+            <i class="far fa-comments"></i>
+            <a href="#" class="bold text-primary">
+              <span class="ml-1">Total Posts:</span>
+            </a>
+          </span>
+          <span class="badge badge-primary badge-primary">14</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-warning no-border bg-light">
+          <span>
+            <i class="fas fa-comments"></i>
+            <a href="#" class="bold text-primary">
+              <span class="ml-1">Total Replies:</span>
+            </a>
+          </span>
+          <span class="badge badge-primary badge-primary">14</span>
+        </li>
+      </ul>
     </div>
   </div>
 

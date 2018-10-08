@@ -56,6 +56,16 @@ class Question(models.Model):
 
         super().save(*args, **kwargs)
 
+    def like(self, user):
+        return self.likes.create(user=user)
+
+    def dislike(self, user):
+        return self.likes.filter(user=user).delete()
+
+    def is_liked_by(self, user):
+        liked_list = self.likes.values_list('user__id', flat=True)
+        return user.id in liked_list
+
     class Meta:
         get_latest_by = "-pk"
 
@@ -71,6 +81,17 @@ class Reply(models.Model):
 
     def __str__(self):
         return "{0} replied to {1}".format(self.creator.username, self.question.title)
+
+    # todo: avoid repeating
+    def like(self, user):
+        return self.likes.create(user=user)
+
+    def dislike(self, user):
+        return self.likes.filter(user=user).delete()
+
+    def is_liked_by(self, user):
+        liked_list = self.likes.values_list('user__id', flat=True)
+        return user.id in liked_list
 
     class Meta:
         verbose_name_plural = "Replies"

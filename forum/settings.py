@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'questions.apps.QuestionsConfig',
-    'accounts.apps.AccountsConfig',
+    'apps.questions.apps.QuestionsConfig',
+    'apps.accounts.apps.AccountsConfig',
     'bootstrap4',
     'debug_toolbar',
 ]
@@ -112,9 +112,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATIC_URL = '/assets/'
-
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'assets'),)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 INTERNAL_IPS = ['127.0.0.1', ]

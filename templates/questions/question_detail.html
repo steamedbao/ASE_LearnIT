@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% load bootstrap4 %}
+{% load forum_extras %}
+{% load static %}
 
 {% block title %} {{ question.title }}  {% endblock %}
 
@@ -10,11 +12,15 @@
     <div class="card-header">
       {% if question.owner == request.user %}
         <span class="float-right">
-          <a href="{% url 'update_question' question.slug %}">Edit</a> |
-          <a href="{% url 'delete_question' question.slug %}">Delete</a>
+          <a href="{% url 'update_question' question.slug %}">
+            <i class="far fa-edit text-info"></i>
+          </a>
+          <a href="{% url 'delete_question' question.slug %}">
+            <i class="fas fa-trash-alt ml-2 text-danger"></i>
+          </a>
         </span>
       {% endif %}
-      <h5>{{ question.title }}</h5>
+      <h5 class="bold">{{ question.title }}</h5>
     </div>
     <div class="card-body">
       <p>
@@ -22,12 +28,20 @@
       </p>
     </div>
     <div class="card-footer">
-      <strong id="likes-counter-{{ question.id }}">
+      <strong class="float-right" id="question-likes-counter">
         {{ question.likes.count }}
         {% if question.likes.count == 1 %} like {% else %} likes {% endif %}
       </strong>
-      <a href="#" class="ml-2">Like</a>
-      <a href="#" class="ml-2">Reply</a>
+
+      {% question_liked_by question request.user as question_is_liked_by_current_user %}
+
+      {% if question_is_liked_by_current_user %}
+        <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/dislike.svg' %}" alt="Dislike icon" />
+      {% else %}
+        <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/like.svg' %}" alt="Like icon" />
+      {% endif %}
+
+      <img id="reply-icon" class="mb-2 action-icon" src="{% static 'images/comment.png' %}" alt="Reply icon" />
     </div>
   </div>
 

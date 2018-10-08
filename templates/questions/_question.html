@@ -1,25 +1,28 @@
-<article class="mb-4">
-  <h5>
-    <strong>
-      <a href="{{ question.get_absolute_url }}" class="text-secondary">
-        {{ question.title }}
+<div class="card mb-4 bg-light no-border">
+  <div class="card-body">
+    <h5>
+      <i class="far fa-comments"></i>
+      <strong>
+        <a href="{{ question.get_absolute_url }}" class="text-secondary">
+          {{ question.title }}
+        </a>
+      </strong>
+      <span class="badge badge-light float-right p-2">
+        {{ question.replies.count }}
+      </span>
+    </h5>
+    <p class="question-desc-text"> 
+      <i class="fas fa-hashtag"></i>
+      <a href="{{ question.category.get_absolute_url }}" class="text-danger bold upper">
+        {{ question.category }}
       </a>
-    </strong>
-  </h5>
-  <span class="badge badge-dark float-right">
-    {{ question.replies.count }}
-  </span>
-  <p style="font-size: 0.9em; font-size: 0.8em;"> 
-    in
-    <a href="{{ question.category.get_absolute_url }}" class="text-danger bold upper">
-      {{ question.category }}
-    </a>
-    by
-    <a href="{% url 'profile' question.owner %}" class="text-success bold upper">
-      {{ question.owner }}
-    </a>
-  </p>
-  <div class="">
-    {{ question.content|slice:':140' }} ...
+      <i class="fas fa-user ml-2"></i>
+      <a href="{% url 'profile' question.owner %}" class="text-success bold upper">
+        {{ question.owner }}
+      </a>
+    </p>
+    <div class="">
+      {{ question.content|slice:':140' }} ...
+    </div>
   </div>
-</article>
+</div>

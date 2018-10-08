@@ -1,8 +1,11 @@
 from django.urls import path
 
-from .views import (CategoryDetailView, QuestionCreateView, QuestionDeleteView,
-                    QuestionDetailView, QuestionUpdateView, ReplyDeleteView,
-                    ReplyUpdateView)
+from .views.categories import CategoryDetailView
+from .views.questions import (QuestionCreateView, QuestionDeleteView,
+                              QuestionDetailView, QuestionUpdateView,
+                              like_or_dislike_question)
+from .views.replies import (ReplyDeleteView, ReplyUpdateView,
+                            like_or_dislike_reply)
 
 urlpatterns = [
     path('categories/<slug:slug>', CategoryDetailView.as_view(), name='category'),
@@ -19,4 +22,9 @@ urlpatterns = [
          ReplyUpdateView.as_view(), name='update_reply'),
     path('<slug:slug>/replies/<int:pk>/delete',
          ReplyDeleteView.as_view(), name='delete_reply'),
+
+    path('questions/<int:id>/like-or-dislike',
+         like_or_dislike_question, name='like_dislike'),
+    path('replies/<int:id>/like-or-dislike',
+         like_or_dislike_reply, name='like_dislike'),
 ]

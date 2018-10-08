@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.http import Http404
-from django.shortcuts import get_list_or_404
+from django.http import JsonResponse
+from django.shortcuts import get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import ReplyForm
-from .models import Category, Question, Reply
+from ..forms import ReplyForm
+from ..models import Question, Reply
 
 
 # class based views
@@ -26,14 +26,9 @@ class IndexView(generic.ListView):
             return reversed(get_list_or_404(Question))
 
 
-class CategoryDetailView(generic.DetailView):
-    model = Category
-    template_name = 'questions/category.html'
-
-
 class QuestionDetailView(generic.DetailView):
     model = Question
-    template_name = 'questions/question.html'
+    template_name = 'questions/question_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -87,33 +82,13 @@ class QuestionDeleteView(generic.edit.DeleteView):
     success_url = reverse_lazy('index')
 
 
-class ReplyUpdateView(generic.UpdateView):
-    model = Reply
-    fields = ['content', ]
-    template_name = 'questions/update_reply.html'
+def like_or_dislike_question(request, id):
+    question = get_object_or_404(Question, pk=id)
+    current_user = request.user
 
-    def get_object(self, queryset=None):
-        obj = super().get_object()
-        if not obj.creator == self.request.user:
-            raise Http404
-        question = Question.objects.get(slug=obj.question.slug)
-        self.question = question
-        return obj
+    if question.is_liked_by(current_user):
+        question.dislike(current_user)
+        return JsonResponse({'message': 'disliked'})
 
-    def get_success_url(self):
-        return reverse_lazy('question', args=(self.question.slug,))
-
-
-class ReplyDeleteView(generic.edit.DeleteView):
-    model = Reply
-
-    def get_object(self, queryset=None):
-        obj = super().get_object()
-        if not obj.creator == self.request.user:
-            raise Http404
-        question = Question.objects.get(slug=obj.question.slug)
-        self.question = question
-        return obj
-
-    def get_success_url(self):
-        return reverse_lazy('question', args=(self.question.slug,))
+    question.like(current_user)
+    return JsonResponse({'message': 'liked'})
