@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
@@ -15,15 +15,28 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        if 'q' in self.request.GET:
-            search = self.request.GET['q']
+        request = self.request
+
+        if 'q' in request.GET:
+            q = request.GET['q']
 
             return Question.objects.filter(
-                Q(title__icontains=search) |
-                Q(content__icontains=search)
+                Q(title__icontains=q) | Q(content__icontains=q)
             )
-        else:
-            return reversed(get_list_or_404(Question))
+
+        elif 'popular' in request.GET:
+            return Question.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')
+
+        elif 'solved' in request.GET and request.GET['solved'] == '1':
+            return get_list_or_404(Question, solved=1)
+
+        elif 'solved' in request.GET and request.GET['solved'] == '0':
+            return get_list_or_404(Question, solved=0)
+
+        elif 'noreplies' in request.GET:
+            return Question.objects.annotate(num_replies=Count('replies')).filter(num_replies=0)
+
+        return reversed(get_list_or_404(Question))
 
 
 class QuestionDetailView(generic.DetailView):
@@ -60,7 +73,7 @@ class QuestionDetailView(generic.DetailView):
             return self.render_to_response(context=context)
 
 
-class QuestionUpdateView(generic.UpdateView):
+class QuestionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Question
     fields = ['category', 'content']
     template_name = 'questions/update_question.html'
@@ -77,7 +90,7 @@ class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class QuestionDeleteView(generic.edit.DeleteView):
+class QuestionDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Question
     success_url = reverse_lazy('index')
 

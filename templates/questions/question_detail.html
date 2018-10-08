@@ -35,13 +35,15 @@
 
       {% question_liked_by question request.user as question_is_liked_by_current_user %}
 
-      {% if question_is_liked_by_current_user %}
-        <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/dislike.svg' %}" alt="Dislike icon" />
-      {% else %}
-        <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/like.svg' %}" alt="Like icon" />
-      {% endif %}
+      {% if request.user.is_authenticated %}
+        {% if question_is_liked_by_current_user %}
+          <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/dislike.svg' %}" alt="Dislike icon" />
+        {% else %}
+          <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/like.svg' %}" alt="Like icon" />
+        {% endif %}
 
-      <img id="reply-icon" class="mb-2 action-icon" src="{% static 'images/comment.png' %}" alt="Reply icon" />
+        <img id="reply-icon" class="mb-2 action-icon" src="{% static 'images/comment.png' %}" alt="Reply icon" />
+      {% endif %}
     </div>
   </div>
 

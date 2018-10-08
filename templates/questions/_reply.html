@@ -29,10 +29,12 @@
     </strong>    
     {% reply_liked_by reply request.user as reply_is_liked_by_current_user %}
 
-    {% if reply_is_liked_by_current_user %}
-      <img class="mb-2 mr-2 action-icon reply-like" data-reply="{{ reply.id }}" src="{% static 'images/dislike.svg' %}" alt="Dislike icon" />
-    {% else %}
-      <img class="mb-2 mr-2 action-icon reply-like" data-reply="{{ reply.id }}" src="{% static 'images/like.svg' %}" alt="Like icon" />
+    {% if request.user.is_authenticated %}
+      {% if reply_is_liked_by_current_user %}
+        <img class="mb-2 mr-2 action-icon reply-like" data-reply="{{ reply.id }}" src="{% static 'images/dislike.svg' %}" alt="Dislike icon" />
+      {% else %}
+        <img class="mb-2 mr-2 action-icon reply-like" data-reply="{{ reply.id }}" src="{% static 'images/like.svg' %}" alt="Like icon" />
+      {% endif %}
     {% endif %}
 
   </div>

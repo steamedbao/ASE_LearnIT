@@ -11,8 +11,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('search', IndexView.as_view(), name='search'),
 
-    path('accounts/', include('apps.accounts.urls')),
-    path('questions/', include('apps.questions.urls')),
+    path('', include('apps.accounts.urls')),
+    path('', include('apps.questions.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

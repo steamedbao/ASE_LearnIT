@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views.generic import DetailView
@@ -13,13 +14,13 @@ class ProfileDetailView(DetailView):
     template_name = 'accounts/profile.html'
 
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileForm
     template_name = 'accounts/profile_edit.html'
 
 
-class AccountUpdateView(UpdateView):
+class AccountUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = RegisterForm
     template_name = 'accounts/account_edit.html'
