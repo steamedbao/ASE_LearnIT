@@ -1,44 +1,44 @@
 <ul class="list-group mb-4">
     <li class="list-group-item d-flex justify-content-between align-items-center no-border bg-light">
-      <span class="upper bold text-secondary">Filters:</span>
+      <span class="upper bold">Filters:</span>
     </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center text-warning no-border bg-light">
+  <li class="list-group-item d-flex justify-content-between align-items-center text-danger no-border bg-light">
     <span>
       <i class="fas fa-globe"></i>  
-      <a href="{% url 'index' %}" class="bold text-primary">
-        <span class="ml-1 upper bold">All Questions</span>
+      <a href="{% url 'index' %}" class="bold">
+        <span class="ml-1 bold">All Questions</span>
       </a>
     </span>
   </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center text-warning bold no-border bg-light">
+  <li class="list-group-item d-flex justify-content-between align-items-center text-danger bold no-border bg-light">
     <span>
       <i class="fas fa-fire"></i>  
-      <a href="{% url 'index' %}?popular=1" class="bold text-primary">
-        <span class="ml-1 upper bold">Most Popular</span>
+      <a href="{% url 'index' %}?popular=1" class="bold">
+        <span class="ml-1 bold">Most Popular</span>
       </a>
     </span>
   </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center text-warning bold no-border bg-light">
+  <li class="list-group-item d-flex justify-content-between align-items-center text-danger bold no-border bg-light">
     <span>
       <i class="fas fa-thumbs-up"></i>
-      <a href="{% url 'index' %}?solved=1" class="bold text-primary">
-        <span class="ml-1 upper bold">Solved</span>
+      <a href="{% url 'index' %}?solved=1" class="bold">
+        <span class="ml-1 bold">Solved</span>
       </a>
     </span>
   </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center text-warning bold no-border bg-light">
+  <li class="list-group-item d-flex justify-content-between align-items-center text-danger bold no-border bg-light">
     <span>
       <i class="fas fa-question-circle"></i>
-      <a href="{% url 'index' %}?solved=0" class="bold text-primary">
-        <span class="ml-1 upper bold">Unsolved</span>
+      <a href="{% url 'index' %}?solved=0" class="bold">
+        <span class="ml-1 bold">Unsolved</span>
       </a>
     </span>
   </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center text-warning bold no-border bg-light">
+  <li class="list-group-item d-flex justify-content-between align-items-center text-danger bold no-border bg-light">
     <span>
       <i class="far fa-lightbulb"></i>
-      <a href="{% url 'index' %}?noreplies=1" class="bold text-primary">
-        <span class="ml-1 upper bold">No Replies</span>
+      <a href="{% url 'index' %}?noreplies=1" class="bold">
+        <span class="ml-1 bold">No Replies</span>
       </a>
     </span>
   </li>

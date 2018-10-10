@@ -24,7 +24,7 @@
     </div>
     <div class="card-body">
       <p>
-        {{ question.content }}
+        {{ question.content|safe }}
       </p>
     </div>
     <div class="card-footer">
@@ -41,8 +41,6 @@
         {% else %}
           <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/like.svg' %}" alt="Like icon" />
         {% endif %}
-
-        <img id="reply-icon" class="mb-2 action-icon" src="{% static 'images/comment.png' %}" alt="Reply icon" />
       {% endif %}
     </div>
   </div>
@@ -52,14 +50,12 @@
   {% endfor %}
 
   {% if request.user.is_authenticated %}
-    <div class="card card-primary">
-      <div class="card-body">
-        <form action="" method="post" class="form">
+    <div class="mt-5">
+      <div class="">
+        <form action="" method="post" class="form" novalidate>
           {% csrf_token %}
           {% bootstrap_form form %}
-          {% buttons %}
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
-          {% endbuttons %}
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
       </div>
     </div>

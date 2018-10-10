@@ -14,9 +14,11 @@
           <a href="{{ question.get_absolute_url }}">
             <h4>{{ question.title }}</h4>
           </a>
-          <p>on {{ question.created_at|date:"M d, Y" }} by {{ question.owner }}  </p>
+          <p>on {{ question.created_at|date:"M d, Y" }} by <a href="{% url 'profile' question.owner %}">{{ question.owner }}</a>  </p>
           <div class="">
-            {{ question.content }}
+              {% with content=question.content|striptags %}
+                {{content|slice:"140"}} ...
+              {% endwith %}
           </div>
         </article>
       {% empty %}

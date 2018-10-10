@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import DetailView
 from django.views.generic.edit import FormView, UpdateView
 
@@ -19,14 +20,23 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProfileForm
     template_name = 'accounts/profile_edit.html'
 
+    def get_object(self):
+        return self.request.user.profile
+
+    def get_success_url(self):
+        return reverse('profile', kwargs={'slug': self.object.slug})
+
 
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
     model = User
-    form_class = RegisterForm
     template_name = 'accounts/account_edit.html'
+    fields = ['username', 'first_name', 'last_name', 'email']
 
     def get_object(self):
         return self.request.user
+
+    def get_success_url(self):
+        return reverse('profile', kwargs={'slug': self.object.profile.slug})
 
 
 class RegisterUserView(FormView):

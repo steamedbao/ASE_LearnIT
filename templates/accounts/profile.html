@@ -3,9 +3,9 @@
 {% block title %} Profiles | {{ profile.user.username }}' profile {% endblock %}
 
 {% block jumbotron %}
-  <div class="jumbotron p-4 bg-dark" style="color: white;">
+  <div class="jumbotron p-5 bg-dark" style="color: white;">
     <div class="container">
-      <img src="{{ profile.avatar.url }}" alt="user's avatar" class="avatar mr-4 mt-2 mb-2 float-left">
+      <img src="{{ profile.avatar.url }}" alt="user's avatar" class="avatar mr-4 mt-2 mb-2 float-left img-thumbnail">
       <p>
         <h2 class="">{{ profile.user.username }}</h2>
         <h6 class="">{{ profile.city }} {{ profile.state }}</h6>
@@ -30,9 +30,11 @@
           <a href="{{ question.get_absolute_url }}">
             <h4>{{ question.title }}</h4>
           </a>
-          <p>in {{ question.category }} by {{ question.owner }}  </p>
+          <p>in <a href="{% url 'category' question.category.slug %}">{{ question.category }}</a> on {{ question.created_at|date:"M d, Y" }}  </p>
           <div class="">
-            {{ question.content }}
+              {% with content=question.content|striptags %}
+                {{content|slice:"140"}} ...
+              {% endwith %}
           </div>
         </article>
       {% empty %}

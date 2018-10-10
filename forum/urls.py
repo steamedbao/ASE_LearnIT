@@ -7,7 +7,7 @@ from django.urls import include, path, reverse
 from apps.questions.views.questions import IndexView
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
 
     path('', IndexView.as_view(), name='index'),
     path('search', IndexView.as_view(), name='search'),

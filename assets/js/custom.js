@@ -74,7 +74,3 @@ function incrementOrDecrementLikes(element, message) {
     decrementLikes(element);
   }
 }
-
-$('#reply-icon').click(function() {
-  $('#id_content').focus();
-});

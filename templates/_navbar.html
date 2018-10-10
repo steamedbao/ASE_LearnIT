@@ -1,9 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark p-3 bg-primary">
   <div class="container">
     <a class="navbar-brand bold" href="/">
-      <em>
-        < <span class=text-primary>code</span>Discussion />
-      </em>
+      __codeDiscussion__
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -30,7 +28,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'new_question' %}">Ask a Question</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'edit_profile' request.user.profile.slug %}">Edit Profile</a>
+              <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a>
               <a class="dropdown-item" href="{% url 'edit_account' %}">Edit Account</a>
 
               {% if request.user.is_superuser %}

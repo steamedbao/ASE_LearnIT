@@ -3,7 +3,7 @@
     <h5>
       <i class="far fa-comments"></i>
       <strong>
-        <a href="{{ question.get_absolute_url }}" class="text-secondary">
+        <a href="{{ question.get_absolute_url }}">
           {{ question.title }}
         </a>
       </strong>
@@ -18,11 +18,14 @@
       </a>
       <i class="fas fa-user ml-2"></i>
       <a href="{% url 'profile' question.owner %}" class="text-success bold upper">
-        {{ question.owner }}
+        {{ question.owner }} 
       </a>
+      on {{ question.created_at|date:"M d, Y" }}
     </p>
     <div class="">
-      {{ question.content|slice:':140' }} ...
+        {% with content=question.content|striptags %}
+        {{content|slice:"140"}} ...
+        {% endwith %}
     </div>
   </div>
 </div>

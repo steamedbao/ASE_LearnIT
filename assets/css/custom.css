@@ -41,7 +41,7 @@ body {
 }
 
 .white-bg {
-  background-color: white;
+  background-color: rgb(228, 153, 153);
 }
 
 .text-secondary {
@@ -71,10 +71,6 @@ body {
   border-bottom: 1px solid black;
 }
 
-.bg-light {
-  background-color: #fbfbfb !important;
-}
-
 .action-icon {
   width: 20px;
   cursor: pointer;
@@ -89,7 +85,6 @@ body {
 }
 
 .avatar {
-  border-radius: 50%;
   width: 100px;
   height: 100px;
 }

@@ -7,7 +7,8 @@ from django.utils.text import slugify
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE)
     slug = models.SlugField(null=True, blank=True)
     bio = models.TextField(max_length=240, blank=True)
     avatar = models.ImageField(
