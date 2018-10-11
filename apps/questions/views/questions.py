@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count, Q
 from django.http import JsonResponse
-from django.shortcuts import get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -83,7 +82,7 @@ class QuestionDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
 
 
 def like_or_dislike_question(request, id):
-    question = get_object_or_404(Question, pk=id)
+    question = Question.objects.get(pk=id)
     current_user = request.user
 
     if question.is_liked_by(current_user):
