@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render
@@ -45,10 +47,9 @@ class RegisterUserView(FormView):
     form_class = RegisterForm
 
     def form_valid(self, form):
-        user = User.objects.create_user(
-            form.cleaned_data['username'],
-            form.cleaned_data['email'],
-            form.cleaned_data['password1']
-        )
-
+        user = form.save()
+        messages.info(
+            self.request, "Thanks for registering. You are now logged in.")
+        authenticate(user=user.username, password=user.password)
+        login(self.request, user)
         return super(RegisterUserView, self).form_valid(form)
