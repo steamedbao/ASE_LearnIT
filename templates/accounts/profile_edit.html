@@ -8,12 +8,12 @@
   <div class="col-md-6 offset-md-3 mt-4">
     <h4 class="mb-4">Edit Profile:</h4>
 
+    <div id="image-preview" class="mx-auto">
+      <img src="{{ request.user.profile.avatar.url }}" id="output" class="avatar">
+    </div>
+
     <form action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <div id="image-preview">
-        <img id="output" class="avatar">
-      </div>
-
       {% bootstrap_form form %}
       {% buttons %}
           <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -27,10 +27,6 @@
 {% block scripts %}
 <script>
   let output = document.getElementById('output');
-
-  $(document).ready(function() {
-    output.src = $("form").find("a").attr("href");
-  });
 
   $('form').change(function (event) {
     output.src = URL.createObjectURL(event.target.files[0]);

@@ -74,3 +74,22 @@ function incrementOrDecrementLikes(element, message) {
     decrementLikes(element);
   }
 }
+
+// mark question as solved from detail view
+$('#solved').click(function(event) {
+  event.preventDefault();
+  console.log('clicked')
+
+  let url = $(this).attr('href');
+
+  let _this = $(this)
+
+  $.get( url, function( response ) {
+    let message = response.message;
+
+    if (message === 'solved') {
+      $(_this).text("SOLVED");
+    } 
+   
+  });
+})

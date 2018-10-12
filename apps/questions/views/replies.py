@@ -13,10 +13,13 @@ class ReplyUpdateView(generic.UpdateView):
 
     def get_object(self, queryset=None):
         obj = super().get_object()
+
         if not obj.creator == self.request.user:
             raise Http404
+
         question = Question.objects.get(slug=obj.question.slug)
         self.question = question
+
         return obj
 
     def get_success_url(self):
@@ -28,10 +31,13 @@ class ReplyDeleteView(generic.edit.DeleteView):
 
     def get_object(self, queryset=None):
         obj = super().get_object()
+
         if not obj.creator == self.request.user:
             raise Http404
+
         question = Question.objects.get(slug=obj.question.slug)
         self.question = question
+
         return obj
 
     def get_success_url(self):

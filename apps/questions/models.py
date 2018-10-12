@@ -38,7 +38,7 @@ class Question(models.Model):
         User, on_delete=models.CASCADE, related_name='questions')
     title = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=150, unique=True, editable=False)
-    content = models.TextField(max_length=30000, blank=False, unique=True)
+    content = models.TextField(max_length=50000, blank=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     solved = models.BooleanField(default=False)

@@ -6,12 +6,21 @@
 
 {% block title %} {{ question.title }}  {% endblock %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+{% endblock %}
+
 {% block content %}
 
   <div class="card card-primary">
     <div class="card-header">
       {% if question.owner == request.user %}
         <span class="float-right">
+          
+          {% if question.solved is not True %}
+            <a id="solved" href="{% url 'solve_question' question.id %}" class="mr-2">Mark as Solved</a>
+          {% endif %}
+
           <a href="{% url 'update_question' question.slug %}">
             <i class="far fa-edit text-info"></i>
           </a>
@@ -20,7 +29,10 @@
           </a>
         </span>
       {% endif %}
-      <h5 class="bold">{{ question.title }}</h5>
+      <a href="{% url 'profile' question.owner %}">
+        <img src="{{ question.owner.profile.avatar.url }}" class="rounded-circle" alt="user's avatar" width="30px">
+      </a>
+      <h5 class="ml-3 bold d-inline">{{ question.title }}</h5>
     </div>
     <div class="card-body">
       <p>
@@ -42,6 +54,7 @@
           <img id="question-like" class="mb-2 mr-2 action-icon" data-question="{{ question.id }}" src="{% static 'images/like.svg' %}" alt="Like icon" />
         {% endif %}
       {% endif %}
+
     </div>
   </div>
 
@@ -54,7 +67,7 @@
       <div class="">
         <form action="" method="post" class="form" novalidate>
           {% csrf_token %}
-          {% bootstrap_form form %}
+          {% bootstrap_field form.content show_label=False %}
           <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
       </div>
@@ -65,4 +78,9 @@
     </div>
   {% endif %}
 
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="{% static 'js/prism.js' %}"></script>
 {% endblock %}

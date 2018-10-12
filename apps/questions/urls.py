@@ -1,22 +1,24 @@
 from django.urls import path
 
 from .views.categories import CategoryDetailView
-from .views.questions import (QuestionCreateView, QuestionDeleteView,
-                              QuestionDetailView, QuestionUpdateView,
-                              like_or_dislike_question)
+from .views.questions import (IndexView, QuestionCreateView,
+                              QuestionDeleteView, QuestionDetailView,
+                              QuestionUpdateView, like_or_dislike_question,
+                              mark_question_as_solved)
 from .views.replies import (ReplyDeleteView, ReplyUpdateView,
                             like_or_dislike_reply)
 
 urlpatterns = [
+    path('search', IndexView.as_view(), name='search'),
+
     path('categories/<slug:slug>', CategoryDetailView.as_view(), name='category'),
 
-    path('new', QuestionCreateView.as_view(), name='new_question'),
-    path('categories/<slug:slug>', CategoryDetailView.as_view(), name='category'),
-    path('<slug:slug>/edit', QuestionUpdateView.as_view(), name='update_question'),
+
     path('new', QuestionCreateView.as_view(), name='new_question'),
     path('<slug:slug>', QuestionDetailView.as_view(), name='question'),
     path('<slug:slug>/edit', QuestionUpdateView.as_view(), name='update_question'),
     path('<slug:slug>/delete', QuestionDeleteView.as_view(), name='delete_question'),
+    path('<int:id>/solved', mark_question_as_solved, name='solve_question'),
 
     path('<slug:slug>/replies/<int:pk>/edit',
          ReplyUpdateView.as_view(), name='update_reply'),

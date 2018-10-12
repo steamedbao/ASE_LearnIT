@@ -26,6 +26,9 @@
         {% with content=question.content|striptags %}
         {{content|slice:"140"}} ...
         {% endwith %}
+        {% if question.solved %}
+          <span class="upper bold text-danger d-inline">Solved</span>
+        {% endif %}
     </div>
   </div>
 </div>

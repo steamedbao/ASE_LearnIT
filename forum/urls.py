@@ -7,13 +7,13 @@ from django.urls import include, path, reverse
 from apps.questions.views.questions import IndexView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
     path('', IndexView.as_view(), name='index'),
-    path('search', IndexView.as_view(), name='search'),
+
+    path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('', include('apps.accounts.urls')),
-    path('', include('apps.questions.urls')),
+    path('questions/', include('apps.questions.urls')),
 
 ]
 

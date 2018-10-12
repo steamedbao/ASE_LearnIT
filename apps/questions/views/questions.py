@@ -82,12 +82,28 @@ class QuestionDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
 
 
 def like_or_dislike_question(request, id):
-    question = Question.objects.get(pk=id)
-    current_user = request.user
+    try:
+        question = Question.objects.get(pk=id)
+        current_user = request.user
 
-    if question.is_liked_by(current_user):
-        question.dislike(current_user)
-        return JsonResponse({'message': 'disliked'})
+        if question.is_liked_by(current_user):
+            question.dislike(current_user)
+            return JsonResponse({'message': 'disliked'})
 
-    question.like(current_user)
-    return JsonResponse({'message': 'liked'})
+        question.like(current_user)
+        return JsonResponse({'message': 'liked'})
+
+    except ObjectDoesNotExist:
+        return JsonResponse({'error': 'Question not found'})
+
+
+def mark_question_as_solved(request, id):
+    try:
+        question = Question.objects.get(pk=id)
+        question.solved = True
+        question.save()
+
+        return JsonResponse({'message': 'solved'})
+
+    except ObjectDoesNotExist:
+        return JsonResponse({'error': 'Question not found'})
