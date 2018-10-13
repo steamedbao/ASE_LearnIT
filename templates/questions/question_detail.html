@@ -34,11 +34,13 @@
       </a>
       <h5 class="ml-3 bold d-inline">{{ question.title }}</h5>
     </div>
+
     <div class="card-body">
       <p>
         {{ question.content|safe }}
       </p>
     </div>
+    
     <div class="card-footer">
       <strong class="float-right" id="question-likes-counter">
         {{ question.likes.count }}

@@ -17,7 +17,7 @@
         {{ question.category }}
       </a>
       <i class="fas fa-user ml-2"></i>
-      <a href="{% url 'profile' question.owner %}" class="text-success bold upper">
+      <a href="{% url 'profile' question.owner %}" class="text-warning bold upper">
         {{ question.owner }} 
       </a>
       on {{ question.created_at|date:"M d, Y" }}
