@@ -1,1 +1,1 @@
-web: gunicorn dj_forum.wsgi --log-file -
+web: gunicorn forum.wsgi --log-file -
