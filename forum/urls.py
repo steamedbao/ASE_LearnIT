@@ -10,7 +10,6 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
 
     path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('', include('apps.accounts.urls')),
     path('questions/', include('apps.questions.urls')),
