@@ -6,13 +6,17 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 
+def profile_avatar_path(instance, filename):
+    return 'avatars/{0}/{1}'.format(instance.slug, filename)
+
+
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE)
     slug = models.SlugField(null=True, blank=True)
     bio = models.TextField(max_length=240, blank=True)
     avatar = models.ImageField(
-        upload_to='avatars/', default='avatars/no-img.png')
+        upload_to=profile_avatar_path, default='avatars/no-img.png')
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(max_length=50, blank=True)
     birthday = models.DateField(null=True, blank=True)
