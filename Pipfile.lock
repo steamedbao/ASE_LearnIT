@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c85718f051f3ff6c4c43fcf22907ded33ade0ab53567ace6fe3188e83510826f"
+            "sha256": "9d45226744ff1d78e635a4f7ce35d43410da3bb59384d5d851841ff1b9bff3bd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -317,6 +317,11 @@
             ],
             "index": "pypi",
             "version": "==3.1"
+        },
+        "python-resize-image": {
+            "hashes": [],
+            "index": "pypi",
+            "version": "==5.3.0"
         },
         "pytz": {
             "hashes": [
