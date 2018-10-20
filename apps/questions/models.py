@@ -82,7 +82,6 @@ class Reply(models.Model):
     def __str__(self):
         return "{0} replied to {1}".format(self.creator.username, self.question.title)
 
-    # todo: avoid repeating
     def like(self, user):
         return self.likes.create(user=user)
 
