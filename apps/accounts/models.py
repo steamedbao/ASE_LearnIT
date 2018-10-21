@@ -34,23 +34,8 @@ class Profile(models.Model):
         return reverse('profile', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.user.username)
-
-        image = Image.open(self.avatar)
-
-        new_image = resizeimage.resize_contain(
-            image, [200, 200], False)
-        new_image_io = BytesIO()
-        new_image.save(new_image_io, format='JPEG')
-
-        temp_name = self.avatar.name
-        self.avatar.delete(save=False)
-
-        self.avatar.save(
-            temp_name,
-            content=ContentFile(new_image_io.getvalue()),
-            save=False
-        )
+        if not self.pk:
+            self.slug = slugify(self.title)
 
         super().save(*args, **kwargs)
 
