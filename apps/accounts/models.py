@@ -35,7 +35,7 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.user.username)
 
         super().save(*args, **kwargs)
 
