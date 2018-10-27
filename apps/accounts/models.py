@@ -1,14 +1,10 @@
-from io import BytesIO
-
 from django.contrib.auth.models import User
-from django.core.files.base import ContentFile
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.text import slugify
 from PIL import Image
-from resizeimage import resizeimage
 
 
 def profile_avatar_path(instance, filename):
@@ -38,6 +34,12 @@ class Profile(models.Model):
             self.slug = slugify(self.user.username)
 
         super().save(*args, **kwargs)
+
+        if self.avatar:
+            img = Image.open(self.avatar.name)
+            if img.height > 300 or img.width > 300:
+                img.thumbnail(300, 300)
+                img.save(profile_avatar_path)
 
 
 @receiver(post_save, sender=User)
