@@ -30,7 +30,7 @@
         </span>
       {% endif %}
       <a href="{% url 'profile' question.owner %}">
-        <img src="{{ question.owner.profile.avatar.url }}" class="rounded-circle" alt="user's avatar" width="30px">
+        <img src="{{ question.owner|gravatar:25 }}" class="rounded-circle" alt="user's avatar" width="30px">
       </a>
       <h5 class="ml-3 bold d-inline">{{ question.title }}</h5>
     </div>

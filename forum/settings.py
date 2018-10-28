@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.questions.apps.QuestionsConfig',
     'apps.accounts.apps.AccountsConfig',
     'bootstrap4',
+    'markdownx',
 ]
 
 if DEBUG:

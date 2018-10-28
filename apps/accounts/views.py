@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView
 from django.views.generic.edit import FormView, UpdateView
