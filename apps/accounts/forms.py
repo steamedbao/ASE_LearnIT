@@ -23,7 +23,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('avatar', 'bio', 'city', 'state', 'birthday', )
+        fields = ('bio', 'city', 'state', 'birthday', )
         widgets = {
             'bio': forms.Textarea(attrs={'rows': "4"}),
             'birthday': forms.DateInput(format=('%m/%d/%Y'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),

@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'apps.questions.apps.QuestionsConfig',
     'apps.accounts.apps.AccountsConfig',
     'bootstrap4',
-    'storages',
 ]
 
 if DEBUG:
@@ -119,23 +118,6 @@ ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'assets'),)
-
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN')
-AWS_REGION = config('AWS_REGION')
-AWS_LOCATION = 'media'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-MEDIAFILES_LOCATION = config('AWS_LOCATION')
-
-
-MEDIA_URL = "https://%s/%s/" % (config('AWS_S3_CUSTOM_DOMAIN'),
-                                MEDIAFILES_LOCATION)
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 INTERNAL_IPS = ['127.0.0.1', ]
 

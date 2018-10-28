@@ -1,3 +1,5 @@
+from hashlib import md5
+
 from django import template
 from django.contrib.auth.models import User
 
@@ -35,3 +37,11 @@ def total_questions_count():
 @register.simple_tag
 def total_replies_count():
     return Reply.objects.all().count()
+
+
+@register.filter(name='gravatar')
+def gravatar(user, size=35):
+    email = str(user.email.strip().lower()).encode('utf-8')
+    email_hash = md5(email).hexdigest()
+    url = "//www.gravatar.com/avatar/{0}?s={1}&d=identicon&r=PG"
+    return url.format(email_hash, size)

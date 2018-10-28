@@ -1,3 +1,5 @@
+{% load forum_extras %}
+
 <nav class="navbar navbar-expand-lg navbar-dark p-3 bg-light">
   <div class="container">
     <a class="navbar-brand bold" href="/">
@@ -22,7 +24,7 @@
 
           <li class="nav-item dropdown">  
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              <i class="fas fa-user"></i>
+              <img src="{{ user|gravatar:25 }}" alt="">
               <span class="ml-1 bold">{{ request.user }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -43,7 +45,7 @@
               Welcome Guest
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+              <a class="dropdown-item" href="{% url 'login' %}">Login</a> 
               <a class="dropdown-item" href="{% url 'register' %}">Register</a>
             </div>
           {% endif %}
