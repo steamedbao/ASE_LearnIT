@@ -13,8 +13,8 @@
     </h5>
     <p class="question-desc-text"> 
       <i class="fas fa-hashtag"></i>
-      <a href="{{ question.category.get_absolute_url }}" class="text-danger bold upper">
-        {{ question.category }}
+      <a href="{{ question.course.get_absolute_url }}" class="text-danger bold upper">
+        {{ question.course }}
       </a>
       <i class="fas fa-user ml-2"></i>
       <a href="{% url 'profile' question.owner %}" class="text-warning bold upper">

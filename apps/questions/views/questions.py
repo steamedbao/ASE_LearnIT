@@ -59,7 +59,7 @@ class QuestionDetailView(generic.DetailView):
 
 class QuestionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Question
-    fields = ['category', 'content', 'solved']
+    fields = ['course', 'content', 'solved']
     template_name = 'questions/update_question.html'
 
 
@@ -67,7 +67,7 @@ class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = '/accounts/login'
     model = Question
     template_name = 'questions/new_question.html'
-    fields = ['category', 'title', 'content']
+    fields = ['course', 'title', 'content']
 
     def form_valid(self, form):
         form.instance.owner = self.request.user

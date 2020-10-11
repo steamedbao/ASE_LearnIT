@@ -3,15 +3,15 @@ from hashlib import md5
 from django import template
 from django.contrib.auth.models import User
 
-from apps.questions.models import Category, Question, Reply
+from apps.questions.models import Course, Question, Reply
 
 register = template.Library()
 
 
-@register.inclusion_tag('questions/_categories.html')
-def show_categories():
-    categories = Category.objects.all()
-    return {'categories': categories}
+@register.inclusion_tag('questions/_courses.html')
+def show_courses():
+    courses = Course.objects.all()
+    return {'courses': courses}
 
 
 @register.simple_tag

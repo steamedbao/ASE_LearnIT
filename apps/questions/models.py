@@ -8,7 +8,7 @@ from django.utils.text import slugify
 
 
 # Create your models here.
-class Category(models.Model):
+class Course(models.Model):
     title = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=150, unique=True, editable=False)
     description = models.CharField(max_length=300)
@@ -19,7 +19,7 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'slug': self.slug})
+        return reverse('course', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -28,12 +28,12 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "Categories"
+        verbose_name_plural = "Course"
 
 
 class Question(models.Model):
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name='questions')
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name='questions')
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='questions')
     title = models.CharField(max_length=150, unique=True)

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views.categories import CategoryDetailView
+from .views.courses import CourseDetailView
 from .views.questions import (IndexView, QuestionCreateView,
                               QuestionDeleteView, QuestionDetailView,
                               QuestionUpdateView, like_or_dislike_question,
@@ -11,7 +11,7 @@ from .views.replies import (ReplyDeleteView, ReplyUpdateView,
 urlpatterns = [
     path('search', IndexView.as_view(), name='search'),
 
-    path('categories/<slug:slug>', CategoryDetailView.as_view(), name='category'),
+    path('courses/<slug:slug>', CourseDetailView.as_view(), name='course'),
 
 
     path('new', QuestionCreateView.as_view(), name='new_question'),

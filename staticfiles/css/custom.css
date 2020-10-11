@@ -41,7 +41,7 @@ body {
 }
 
 .white-bg {
-  background-color: rgb(228, 153, 153);
+  background-color: rgb(135, 206, 235);
 }
 
 .text-secondary {
@@ -90,10 +90,10 @@ body {
 }
 
 a {
-  color: #18BC9C;
+  color: #1b3eaf;
 }
 
 a:hover {
-  color: #18BC9C;
+  color: #1b3eaf;
 }
 

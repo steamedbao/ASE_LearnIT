@@ -8,11 +8,12 @@ chardet==3.0.4
 colorama==0.3.9
 coverage==4.4.2
 dj-database-url==0.4.2
-Django==2.0.1
+Django==2.1.5
 django-bootstrap4==0.0.5
 django-debug-toolbar==1.9.1
 django-environ==0.4.4
 django-storages==1.7.1
+django-markdownx
 docutils==0.14
 gunicorn==19.7.1
 idna==2.7
@@ -23,7 +24,6 @@ mccabe==0.6.1
 Pillow==5.3.0
 pipenv==2018.10.9
 pluggy==0.6.0
-psycopg2==2.7.3.2
 py==1.5.2
 pycodestyle==2.4.0
 pylint==2.1.1

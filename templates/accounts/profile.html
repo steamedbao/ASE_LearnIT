@@ -30,7 +30,7 @@
           <a href="{{ question.get_absolute_url }}">
             <h4>{{ question.title }}</h4>
           </a>
-          <p>in <a href="{% url 'category' question.category.slug %}">{{ question.category }}</a> on {{ question.created_at|date:"M d, Y" }}  </p>
+          <p>in <a href="{% url 'course' question.course.slug %}">{{ question.course }}</a> on {{ question.created_at|date:"M d, Y" }}  </p>
           <div class="">
               {% with content=question.content|striptags %}
                 {{content|slice:"140"}} ...
